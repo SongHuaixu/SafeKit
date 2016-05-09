@@ -13,13 +13,17 @@
 
 -(instancetype)initWithObjects_safe:(id *)objects forKeys:(id<NSCopying> *)keys count:(NSUInteger)cnt {
     NSUInteger newCnt = 0;
+    __unsafe_unretained id newKeys[cnt];
+    __unsafe_unretained id newObjects[cnt];
     for (NSUInteger i = 0; i < cnt; i++) {
         if (!(keys[i] && objects[i])) {
-            break;
+            continue;
         }
+        newKeys[newCnt] = keys[i];
+        newObjects[newCnt] = objects[i];
         newCnt++;
     }
-    self = [self initWithObjects_safe:objects forKeys:keys count:newCnt];
+    self = [self initWithObjects_safe:&newObjects forKeys:&newKeys count:newCnt];
     return self;
 }
 
