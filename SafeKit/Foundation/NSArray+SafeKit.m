@@ -13,13 +13,15 @@
 
 - (instancetype)initWithObjects_safe:(id *)objects count:(NSUInteger)cnt {
     NSUInteger newCnt = 0;
+    __unsafe_unretained id newObjects[cnt];
     for (NSUInteger i = 0; i < cnt; i++) {
         if (!objects[i]) {
-            break;
+            continue;
         }
+        newObjects[newCnt] = objects[i];
         newCnt++;
     }
-    self = [self initWithObjects_safe:objects count:newCnt];
+    self = [self initWithObjects_safe:&newObjects count:newCnt];
     return self;
 }
 
