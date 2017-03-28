@@ -6,5 +6,5 @@
 //  Copyright (c) 2014年 zhangyu. All rights reserved.
 //
 
-#import "NSObject+swizzle.h"
+#import "NSObject+Swizzle.h"
 #import "SafeKitMacro.h"
